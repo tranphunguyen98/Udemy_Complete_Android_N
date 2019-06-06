@@ -63,8 +63,10 @@ class MainActivity : AppCompatActivity() {
         listResult[indexCorrect] = correctResult
 
         for (i in listResult.indices) {
-            if(i != indexCorrect) {
-                listResult[i] = Random.nextInt(200)
+            if (i != indexCorrect) {
+                do {
+                    listResult[i] = Random.nextInt(200)
+                } while (listResult[i] == correctResult)
             } else {
                 listResult[i] = correctResult
             }
