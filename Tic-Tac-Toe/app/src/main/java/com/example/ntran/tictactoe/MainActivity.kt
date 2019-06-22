@@ -10,19 +10,24 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    var arrayNode = intArrayOf(-1, -1, -1, -1, -1, -1, -1, -1, -1)
-    var arrayWin = arrayListOf(
+    private var arrayNode = intArrayOf(-1, -1, -1, -1, -1, -1, -1, -1, -1)
+    private val arrayWin = arrayListOf(
         arrayListOf(0, 1, 2), arrayListOf(3, 4, 5), arrayListOf(6, 7, 8),
         arrayListOf(0, 3, 6), arrayListOf(1, 4, 7), arrayListOf(2, 5, 8),
         arrayListOf(0, 4, 8), arrayListOf(2, 4, 6)
     )
     var styleUser = 0
     var isContinue = true
+
     fun dropIn(v: View) {
-        val index = v.tag.toString().toInt()
-        Log.d("Test111",index.toString() + ":" + arrayNode[index].toString() + ":" + isContinue.toString())
+        val indexOfTable = v.tag.toString().toInt()
+
+        Log.d(
+            "Test111",
+            indexOfTable.toString() + ":" + arrayNode[indexOfTable].toString() + ":" + isContinue.toString()
+        )
         val imgV = v as ImageView
-        if (arrayNode[index] == -1 && isContinue) {
+        if (arrayNode[indexOfTable] == -1 && isContinue) {
             if (styleUser == 0) {
                 imgV.setImageResource(R.drawable.red)
                 imgV.translationY = -1000f
@@ -35,7 +40,8 @@ class MainActivity : AppCompatActivity() {
                 imgV.animate().scaleXBy(1f).scaleYBy(1f).duration = 300
                 styleUser = 0
             }
-            arrayNode[index] = styleUser
+
+            arrayNode[indexOfTable] = styleUser
 
             for (it in arrayWin) {
                 if (arrayNode[it[0]] == arrayNode[it[1]] && arrayNode[it[1]] == arrayNode[it[2]] && arrayNode[it[0]] != -1) {
@@ -61,15 +67,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
+
     private fun reset() {
-        for (i in 0..this.main.childCount ) {
+        for (i in 0..this.main.childCount) {
             val view = this.main.getChildAt(i)
-            if(view != null) {
-                if(view is AppCompatImageView) {
-                    view.setImageResource(0)
-                }
+            if (view is AppCompatImageView) {
+                view.setImageResource(0)
             }
         }
+
         isContinue = true
         arrayNode = intArrayOf(-1, -1, -1, -1, -1, -1, -1, -1, -1)
         styleUser = 0
