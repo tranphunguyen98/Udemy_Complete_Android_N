@@ -4,6 +4,7 @@ import android.os.AsyncTask
 import android.support.design.widget.Snackbar
 import android.util.Log
 import android.view.View
+import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONException
@@ -52,22 +53,14 @@ class OkHttpHandler(myCallBack: MyCallBack,view: View) : AsyncTask<String, Void,
     }
 
     private fun getDetailFromData(data: String): String {
-        var detail = ""
+        val weather = Gson().fromJson(data,Weather::class.java)
 
-        val jsonObject = JSONObject(data)
-
-        if(jsonObject.has("weather")) {
-            val weatherInfo = jsonObject.getJSONArray("weather")
-            for (i in 0 until weatherInfo.length()) {
-                val jsonPart = weatherInfo.getJSONObject(i)
-
-                detail = jsonPart.getString("main") + ": " + jsonPart.getString("description")
-            }
-
-            Log.d("Test1", detail + "1")
+        val detailWeather : DetailWeather? = weather?.listDetailWeather?.get(0)
+        detailWeather?.let {
+            return it.main + " : " + it.description
         }
 
-        return detail
+        return ""
     }
 
     private fun getDataFromUrl(url: String): String {
