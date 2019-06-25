@@ -5,10 +5,11 @@ import android.support.design.widget.Snackbar
 import android.util.Log
 import android.view.View
 import com.google.gson.Gson
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONException
-import org.json.JSONObject
 import java.lang.ref.WeakReference
 
 class OkHttpHandler(myCallBack: MyCallBack,view: View) : AsyncTask<String, Void, String>() {
@@ -53,6 +54,12 @@ class OkHttpHandler(myCallBack: MyCallBack,view: View) : AsyncTask<String, Void,
     }
 
     private fun getDetailFromData(data: String): String {
+
+//        val moshi = Moshi.Builder().build()
+//        val adapter = moshi.adapter<Any>(Object::class.java)
+//        val adapter : JsonAdapter<WeatherJson> = moshi.adapter(WeatherJson::class.java)
+//        val weather = adapter.fromJson(data)
+
         val weather = Gson().fromJson(data,Weather::class.java)
 
         val detailWeather : DetailWeather? = weather?.listDetailWeather?.get(0)
