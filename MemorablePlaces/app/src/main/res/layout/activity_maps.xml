@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/rootContent"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+>
+    <fragment
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/map"
+            tools:context=".MapsActivity"
+            android:name="com.google.android.gms.maps.SupportMapFragment"/>
+    <androidx.cardview.widget.CardView
+            android:id="@+id/snackbarCustom"
+            android:layout_width="0dp"
+            android:layout_height="118dp"
+            map:layout_constraintBottom_toBottomOf="@+id/map" map:layout_constraintEnd_toEndOf="parent"
+            map:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="1dp"
+            map:cardBackgroundColor="#e8f5e9">
+        <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+                                                           android:layout_height="match_parent">
+            <TextView
+                    android:text="TextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" android:id="@+id/tvAdress"
+                    map:layout_constraintStart_toStartOf="parent" android:layout_marginStart="24dp"
+                    android:textSize="16sp"
+                    android:textColor="#313131"
+                    android:layout_marginTop="16dp"
+                    map:layout_constraintTop_toTopOf="parent" android:layout_marginEnd="24dp"
+                    map:layout_constraintEnd_toEndOf="parent"/>
+            <Button
+                    android:text="Save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/snackbarOk" android:layout_marginBottom="8dp"
+                    map:layout_constraintBottom_toBottomOf="parent" map:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp" style="@style/Widget.AppCompat.Button.Borderless"
+                    android:textColor="#ab47bc"/>
+            <Button
+                    android:text="Cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/snackbarCancel" map:layout_constraintEnd_toStartOf="@+id/snackbarOk"
+                    android:layout_marginEnd="8dp" android:layout_marginBottom="8dp"
+                    map:layout_constraintBottom_toBottomOf="parent" style="@style/Widget.AppCompat.Button.Borderless"
+                    android:textColor="#ab47bc"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
